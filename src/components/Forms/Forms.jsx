@@ -17,6 +17,11 @@ function forms() {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [name, setName] = useState("");
+  const [organisation, setOrganisation] = useState("");
+  const [mentor, setMentor] = useState("");
+  const [organisedBy, setOrganisedBy] = useState("");
+  const [internshipName, setInternshipName] = useState("");
+  const [role, setRole] = useState("");
 
   const [show, setShow] = useState(false);
   const classes = useStyles();
@@ -50,10 +55,24 @@ function forms() {
           <TextField required fullWidth label="Contact Number " />
         </Grid>
         <Grid item md={6} xs={12}>
-          <TextField required fullWidth label="Organisation" />
+          <TextField
+            value={organisation}
+            onChange={(e) => {
+              setOrganisation(e.target.value);
+            }}
+            required
+            fullWidth
+            label="Organisation"
+          />
         </Grid>
         <Grid item md={6} xs={12}>
-          <TextField required fullWidth label="Mentor" />
+          <TextField
+            value={mentor}
+            onChange={(e) => setMentor(e.target.value)}
+            required
+            fullWidth
+            label="Mentor"
+          />
         </Grid>
         <Grid item md={6} xs={12}>
           <FormControl sx={{ width: "100%" }}>
@@ -62,20 +81,28 @@ function forms() {
               required
               labelId=""
               id=""
-              value={""}
-              onChange={() => ({})}
+              value={role}
+              onChange={(e) => { setRole(e.target.value) }}
               label="Role"
             >
-              <MenuItem>One</MenuItem>
+              <MenuItem value={1}>One</MenuItem>
               <hr />
-              <MenuItem>Two</MenuItem>
+              <MenuItem value={2}>Two</MenuItem>
               <hr />
-              <MenuItem>Three</MenuItem>
+              <MenuItem value={3}>Three</MenuItem>
             </Select>
           </FormControl>
         </Grid>
         <Grid item md={6} xs={12}>
-          <TextField required fullWidth label="InternShip Organizer" />
+          <TextField
+            required
+            value={organisedBy}
+            onChange={(e) => {
+              setOrganisedBy(e.target.value);
+            }}
+            fullWidth
+            label="InternShip Organizer"
+          />
         </Grid>
 
         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -109,7 +136,14 @@ function forms() {
       >
         View your Certificate
       </Button>
-      {show && <Certificate name={name} />}
+      {show && (
+        <Certificate
+          name={name}
+          organisation={organisation}
+          organisedBy={organisedBy}
+          mentor={mentor}
+        />
+      )}
     </>
   );
 }
