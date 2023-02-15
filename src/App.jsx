@@ -7,7 +7,8 @@ import {
   CssBaseline,
   useScrollTrigger,
   Box,
-  Link
+  Link,
+  Container
 } from "@mui/material";
 import useStyles from "./styles";
 import CertificatePage from "./components/CertificatePage";
@@ -64,15 +65,10 @@ export default function ElevateAppBar(props) {
           </Typography>
         </Box>
       </div>
-      <Box p={6}>
+      <Container xs={12}  p={6}>
         <CertificatePage/>
-        <Typography
-          sx={{ textAlign: "center", fontWeight: "bold", color: "#fe4350" }}
-          variant="h4"
-        >
-          
-        </Typography>
-      </Box>
+        
+      </Container>
     </>
   );
 }

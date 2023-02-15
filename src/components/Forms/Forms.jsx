@@ -6,12 +6,29 @@ import {
   Select,
   TextField,
   Button,
+  Box,
 } from "@mui/material";
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import React, { useState } from "react";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import useStyles from "./styles";
 import Certificate from "../Certificate/Certificate";
+import dayjs from "dayjs";
+import { useFormik } from "formik";
+import { validationSchema } from "../../schema/validationSchema";
+
+const initialValues = {
+  name: "",
+  internshipName: "",
+  email: "",
+  mobileNumber: "",
+  organisationName: "",
+  //
+  role: "",
+  internshipOrganiser: "",
+  startDate: null,
+  endDate: null,
+};
 
 function forms() {
   const [startDate, setStartDate] = useState(null);
@@ -23,128 +40,205 @@ function forms() {
   const [internshipName, setInternshipName] = useState("");
   const [role, setRole] = useState("");
 
+  const {
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    errors,
+    touched,
+    values,
+    isValid,
+    setFieldValue,
+  } = useFormik({
+    initialValues,
+    validationSchema: validationSchema,
+    onSubmit: (data) => {
+      console.log(data);
+    },
+  });
+  console.log(errors);
+  console.log(isValid);
   const [show, setShow] = useState(false);
   const classes = useStyles();
   return (
-    <>
-      <Grid
-        mt={1}
-        container
-        justifyContent={"space-between"}
-        columnSpacing={5}
-        rowSpacing={5}
-      >
-        <Grid item md={6} xs={12}>
-          <TextField
-            value={name}
-            required
-            fullWidth
-            label="Name"
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-          />
-        </Grid>
-        <Grid item md={6} xs={12}>
-          <TextField required fullWidth label="InternShip Name" />
-        </Grid>
-        <Grid item md={6} xs={12}>
-          <TextField required fullWidth label="Email" />
-        </Grid>
-        <Grid item md={6} xs={12}>
-          <TextField required fullWidth label="Contact Number " />
-        </Grid>
-        <Grid item md={6} xs={12}>
-          <TextField
-            value={organisation}
-            onChange={(e) => {
-              setOrganisation(e.target.value);
-            }}
-            required
-            fullWidth
-            label="Organisation"
-          />
-        </Grid>
-        <Grid item md={6} xs={12}>
-          <TextField
-            value={mentor}
-            onChange={(e) => setMentor(e.target.value)}
-            required
-            fullWidth
-            label="Mentor"
-          />
-        </Grid>
-        <Grid item md={6} xs={12}>
-          <FormControl sx={{ width: "100%" }}>
-            <InputLabel>Role</InputLabel>
-            <Select
+    <Box display="flex">
+      <form onSubmit={handleSubmit}>
+        <Grid
+          display="flex"
+          mt={1}
+          container
+          justifyContent={"space-between"}
+          columnSpacing={5}
+          rowSpacing={5}
+        >
+          <Grid item md={6} xs={12}>
+            <TextField
+              error={touched.name && !!errors.name}
+              helperText={touched.name && errors.name}
               required
-              labelId=""
-              id=""
-              value={role}
-              onChange={(e) => { setRole(e.target.value) }}
-              label="Role"
+              name="name"
+              value={values.name}
+              fullWidth
+              label="Name"
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </Grid>
+          <Grid item md={6} xs={12}>
+            <TextField
+              error={touched.internshipName && !!errors.internshipName}
+              helperText={touched.internshipName && errors.internshipName}
+              required
+              name="internshipName"
+              value={values.internshipName}
+              fullWidth
+              label="Internship Name"
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </Grid>
+          <Grid item md={6} xs={12}>
+            <TextField
+              error={touched.email && !!errors.email}
+              helperText={touched.email && errors.email}
+              required
+              name="email"
+              value={values.email}
+              fullWidth
+              label="Email"
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </Grid>
+          <Grid item md={6} xs={12}>
+            <TextField
+              error={touched.mobileNumber && !!errors.mobileNumber}
+              helperText={touched.mobileNumber && errors.mobileNumber}
+              required
+              name="mobileNumber"
+              value={values.mobileNumber}
+              fullWidth
+              label="Mobile Number"
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </Grid>
+          <Grid item md={6} xs={12}>
+            <TextField
+              error={touched.organisationName && !!errors.organisationName}
+              helperText={touched.organisationName && errors.organisationName}
+              required
+              name="organisationName"
+              value={values.organisationName}
+              fullWidth
+              label="Organisation Name"
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </Grid>
+          <Grid item md={6} xs={12}>
+            <Button className={classes.button} sx={{backgroundColor:'white',color:'black'}} fullWidth variant="contained" component="label">
+              Upload an image
+              <input  hidden accept="image/*" multiple type="file" />
+            </Button>
+          </Grid>
+          <Grid item md={6} xs={12}>
+            <FormControl
+              error={touched.role && !!errors.role}
+              required
+              sx={{ width: "100%" }}
             >
-              <MenuItem value={1}>One</MenuItem>
-              <hr />
-              <MenuItem value={2}>Two</MenuItem>
-              <hr />
-              <MenuItem value={3}>Three</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item md={6} xs={12}>
-          <TextField
-            required
-            value={organisedBy}
-            onChange={(e) => {
-              setOrganisedBy(e.target.value);
-            }}
-            fullWidth
-            label="InternShip Organizer"
-          />
-        </Grid>
+              <InputLabel>Role</InputLabel>
+              <Select
+                // labelId="role"
+                label="role"
+                name="role"
+                value={values.role}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              >
+                <MenuItem value={""}>
+                  <em>Select</em>
+                </MenuItem>
+                <hr />
+                <MenuItem value={"Web Developer"}>Web Developer</MenuItem>
+                <hr />
+                <MenuItem value={2}>Two</MenuItem>
+                <hr />
+                <MenuItem value={3}>Three</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item md={6} xs={12}>
+            <TextField
+              error={
+                touched.internshipOrganiser && !!errors.internshipOrganiser
+              }
+              helperText={
+                touched.internshipOrganiser && errors.internshipOrganiser
+              }
+              required
+              name="internshipOrganiser"
+              value={values.internshipOrganiser}
+              fullWidth
+              label="Internship Organiser"
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </Grid>
 
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <Grid item md={6} xs={12}>
-            <DesktopDatePicker
-              className={classes.date}
-              label="Start Date"
-              value={startDate}
-              inputFormat="DD/MM/YYYY"
-              onChange={(newValue) => setStartDate(newValue)}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </Grid>
-          <Grid item md={6} xs={12}>
-            <DesktopDatePicker
-              value={endDate}
-              className={classes.date}
-              label="End Date"
-              inputFormat="DD/MM/YYYY"
-              onChange={(newValue) => setEndDate(newValue)}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </Grid>
-        </LocalizationProvider>
-      </Grid>
-      <Button
-        onClick={() => {
-          setShow(!show), console.log({ show });
-        }}
-        variant="contained"
-      >
-        View your Certificate
-      </Button>
-      {show && (
-        <Certificate
-          name={name}
-          organisation={organisation}
-          organisedBy={organisedBy}
-          mentor={mentor}
-        />
-      )}
-    </>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <Grid item md={6} xs={12}>
+              <DesktopDatePicker
+                disableFuture
+                className={classes.date}
+                label="Start Date"
+                value={values.startDate}
+                inputFormat="DD/MM/YYYY"
+                onChange={(value) =>
+                  setFieldValue("startDate", dayjs(value).format("DD-MMM-YYYY"))
+                }
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <DesktopDatePicker
+                disableFuture
+                value={values.endDate}
+                className={classes.date}
+                label="End Date"
+                inputFormat="DD/MM/YYYY"
+                onChange={(value) =>
+                  setFieldValue("endDate", dayjs(value).format("DD-MMM-YYYY"))
+                }
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </Grid>
+          </LocalizationProvider>
+        </Grid>
+        <Box display="flex" justifyContent="center">
+          <Button
+            sx={{ m: "3em 0", p: ".7rem", letterSpacing: 1 }}
+            disabled={!isValid}
+            type="submit"
+            variant="contained"
+          >
+            View your Certificate
+          </Button>
+        </Box>
+        {true && (
+          <Certificate
+            name={values.name}
+            organisation={values.organisationName}
+            organisedBy={values.internshipOrganiser}
+            internshipName={values.internshipName}
+            role={values.role}
+            startDate={values.startDate}
+            endDate={values.endDate}
+          />
+        )}
+      </form>
+    </Box>
   );
 }
 

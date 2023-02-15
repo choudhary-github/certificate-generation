@@ -11,8 +11,6 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: ["Poppins", "sans-serif"].join(","),
-    fontWeightRegular: 500,
-    fontWeightBold: 600,
   },
 });
 

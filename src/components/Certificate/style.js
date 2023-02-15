@@ -3,25 +3,34 @@ import { makeStyles } from "@mui/styles";
 export default makeStyles(() => ({
   container:{
     border:'2px solid black',
-    textAlign:'center',
-    padding:50,
-  },
-  text:{
-    textTransform:'uppercase',
+    display:'flex',
   },
   box:{
     display:'flex',
+    margin:'25px 50px 0px',
+  },
+  list:{
+    // margin:'0 50px',
+    display:'flex',
     justifyContent:'space-around',
-    alignItems:'center',
-    marginBottom:'1.6em'
+    padding:10,
+    alignItems:'center'
+
   },
-  logo:{
-    width:200
+  details:{
+    width:'50%',
   },
-  head:{
-    marginBottom:'1em !important'
+  buttons:{
+    display:'flex',
+    justifyContent:'center',
+    
   },
-  bold:{
-    fontFamily:'Poppins !important'
+  detailsBox:{
+    justifyContent:'center',
+    // border:'2px solid red',
+    width:'80%',
+    margin:'0 auto !important',
+    margin:"20px 50px 0px !important"
   }
+
 }));

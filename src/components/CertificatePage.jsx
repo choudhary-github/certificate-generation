@@ -15,13 +15,24 @@ function certificatePage() {
 
   return (
     <div className={classes.app}>
-      <Typography sx={{ textAlign: "center" }}>
+      <Typography
+        sx={{
+          textAlign: "center",
+          fontSize: "2.3rem",
+          mt: "2em",
+          mb: "1.5em",
+          fontWeight: "500",
+          color: "primary.main",
+        }}
+      >
         Make Your Certificate
       </Typography>
       <Container className={classes.container}>
-        <Typography> Enter Your Details</Typography>
+        <Typography sx={{ fontSize: "1.5rem", color: "primary.main" }}>
+          {" "}
+          Enter Your Details
+        </Typography>
         <Forms />
-        
       </Container>
     </div>
   );
