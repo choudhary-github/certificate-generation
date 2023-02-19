@@ -9,13 +9,14 @@ import {
   Box,
 } from "@mui/material";
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import useStyles from "./styles";
 import Certificate from "../Certificate/Certificate";
 import dayjs from "dayjs";
 import { useFormik } from "formik";
 import { validationSchema } from "../../schema/validationSchema";
+import { FormHelperText } from "@mui/material";
 
 const initialValues = {
   name: "",
@@ -23,23 +24,14 @@ const initialValues = {
   email: "",
   mobileNumber: "",
   organisationName: "",
-  //
+  image: "",
   role: "",
   internshipOrganiser: "",
-  startDate: null,
   endDate: null,
+  startDate: null,
 };
 
 function forms() {
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-  const [name, setName] = useState("");
-  const [organisation, setOrganisation] = useState("");
-  const [mentor, setMentor] = useState("");
-  const [organisedBy, setOrganisedBy] = useState("");
-  const [internshipName, setInternshipName] = useState("");
-  const [role, setRole] = useState("");
-
   const {
     handleBlur,
     handleChange,
@@ -56,10 +48,9 @@ function forms() {
       console.log(data);
     },
   });
-  console.log(errors);
-  console.log(isValid);
-  const [show, setShow] = useState(false);
+
   const classes = useStyles();
+
   return (
     <Box display="flex">
       <form onSubmit={handleSubmit}>
@@ -137,9 +128,26 @@ function forms() {
             />
           </Grid>
           <Grid item md={6} xs={12}>
-            <Button className={classes.button} sx={{backgroundColor:'white',color:'black'}} fullWidth variant="contained" component="label">
+            <Button
+              className={classes.button}
+              sx={{ backgroundColor: "white", color: "black" }}
+              fullWidth
+              variant="contained"
+              component="label"
+            >
               Upload an image
-              <input  hidden accept="image/*" multiple type="file" />
+              <input
+                name="file"
+                onChange={(e) => {
+                  setFieldValue(
+                    "image",
+                    URL.createObjectURL(e.target.files[0])
+                  );
+                }}
+                hidden
+                accept="image/*"
+                type="file"
+              />
             </Button>
           </Grid>
           <Grid item md={6} xs={12}>
@@ -150,7 +158,6 @@ function forms() {
             >
               <InputLabel>Role</InputLabel>
               <Select
-                // labelId="role"
                 label="role"
                 name="role"
                 value={values.role}
@@ -167,6 +174,9 @@ function forms() {
                 <hr />
                 <MenuItem value={3}>Three</MenuItem>
               </Select>
+              {touched.role && (
+                <FormHelperText>Please choose one.</FormHelperText>
+              )}
             </FormControl>
           </Grid>
           <Grid item md={6} xs={12}>
@@ -198,7 +208,7 @@ function forms() {
                 onChange={(value) =>
                   setFieldValue("startDate", dayjs(value).format("DD-MMM-YYYY"))
                 }
-                renderInput={(params) => <TextField {...params} />}
+                renderInput={(params) => <TextField {...params} required />}
               />
             </Grid>
             <Grid item md={6} xs={12}>
@@ -211,7 +221,7 @@ function forms() {
                 onChange={(value) =>
                   setFieldValue("endDate", dayjs(value).format("DD-MMM-YYYY"))
                 }
-                renderInput={(params) => <TextField {...params} />}
+                renderInput={(params) => <TextField {...params} required />}
               />
             </Grid>
           </LocalizationProvider>
@@ -235,6 +245,7 @@ function forms() {
             role={values.role}
             startDate={values.startDate}
             endDate={values.endDate}
+            image={values.image}
           />
         )}
       </form>

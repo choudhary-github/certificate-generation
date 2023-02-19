@@ -4,7 +4,7 @@ export default makeStyles((theme) => ({
   app: {
     boxSizing:'border-box' ,
     color: "white",
-    padding: "0 40px !important",
+    // padding: "0 40px !important",
     height: "92vh",
     background:
       "linear-gradient(to right,#ff6d3e,#fe4350)" /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */,
@@ -12,8 +12,8 @@ export default makeStyles((theme) => ({
   appbar: {
     background: "inherit",
     padding: "inherit",
-    paddingTop: ".9em !important",
-    paddingBottom: ".9em !important",
+    paddingTop: ".7em !important",
+    paddingBottom: ".7em !important",
   },
   button: {
     color: "white !important",

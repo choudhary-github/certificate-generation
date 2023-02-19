@@ -1,11 +1,5 @@
-import React, { useState } from "react";
-import {
-  Typography,
-  Container,
-  FormControl,
-  TextField,
-  Button,
-} from "@mui/material";
+import React from "react";
+import { Typography, Container } from "@mui/material";
 import useStyles from "./styles";
 import Forms from "./Forms/Forms";
 import Certificate from "./Certificate/Certificate";
@@ -33,7 +27,7 @@ function certificatePage() {
           Enter Your Details
         </Typography>
         <Forms />
-      </Container>
+      </Container>  
     </div>
   );
 }

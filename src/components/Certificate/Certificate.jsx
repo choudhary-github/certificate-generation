@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import React from "react";
 import useStyles from "./style";
-import image from "../../assets/Screenshot 2023-02-13 034003.png";
 
 const theme = createTheme({
   typography: {
@@ -19,6 +18,7 @@ const theme = createTheme({
 
 function Certificate(props) {
   const {
+    image,
     name,
     organisation,
     organisedBy,
@@ -27,10 +27,10 @@ function Certificate(props) {
     startDate,
     endDate,
   } = props;
-  const firstName = name;
-  // const firstName = name.split(' ').slice(0, 1).join(' ')
+  const firstName =  name.split(' ').slice(0, 1).join(' ')
   const randomNum = Math.floor(Math.random() * 9000000000) + 1000000000;
-  const classes = useStyles();
+  const classes = useStyles()
+
   return (
     <div className="main">
       <ThemeProvider theme={theme}>

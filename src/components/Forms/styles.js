@@ -8,6 +8,7 @@ export default makeStyles(()=>({
     height:'54px',
     '&:hover':{
       background:'white !important'
-    }
+    },
+    textTransform:'capitalize !important'
   }
 }))
