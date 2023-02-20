@@ -15,24 +15,27 @@ const theme = createTheme({
     fontFamily: "Poppins",
   },
 });
+import { useLocation } from "react-router-dom";
 
-function Certificate(props) {
+function Certificate() {
+  const location = useLocation();
+  console.log(location.state);
   const {
     image,
     name,
-    organisation,
-    organisedBy,
+    organisationName,
+    internshipOrganiser,
     internshipName,
     role,
     startDate,
     endDate,
-  } = props;
-  const firstName =  name.split(' ').slice(0, 1).join(' ')
+  } = location.state;
+  let firstName = name.split(' ').slice(0, 1).join(' ')
   const randomNum = Math.floor(Math.random() * 9000000000) + 1000000000;
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
-    <div className="main">
+    <div className={classes.main}>
       <ThemeProvider theme={theme}>
         <Container className={classes.container} maxWidth="md">
           <Typography fontWeight={400} fontSize={"2.7rem"} color={"#3c3b7a"}>
@@ -42,7 +45,7 @@ function Certificate(props) {
             </Typography>
           </Typography>
           <Box className={classes.box}>
-            <img width="110px" height="120px" src={image} alt="image" />
+            <img width="110px" maxHeight="120px" src={image} alt="image" />
             <Box sx={{ ml: 8 }}>
               <Typography
                 fontSize={"1.7rem"}
@@ -140,7 +143,7 @@ function Certificate(props) {
                 sx={{ color: "primary.main" }}
                 className={classes.details}
               >
-                {organisation}
+                {organisationName}
               </Typography>
             </Box>
             <Divider />
@@ -158,7 +161,7 @@ function Certificate(props) {
                 sx={{ color: "primary.main" }}
                 className={classes.details}
               >
-                {organisedBy}
+                {internshipOrganiser}
               </Typography>
             </Box>
             <Divider />
@@ -217,6 +220,7 @@ function Certificate(props) {
               Download
             </Button>
             <Button
+            onClick={()=>{window.print()}}
               sx={{
                 width: "10em",
                 fontWeight: "400",

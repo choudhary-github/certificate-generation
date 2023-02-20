@@ -7,6 +7,8 @@ import {
   TextField,
   Button,
   Box,
+  Container,
+  Typography,
 } from "@mui/material";
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import React, { useState, useRef } from "react";
@@ -17,7 +19,7 @@ import dayjs from "dayjs";
 import { useFormik } from "formik";
 import { validationSchema } from "../../schema/validationSchema";
 import { FormHelperText } from "@mui/material";
-
+import { useNavigate } from "react-router-dom";
 const initialValues = {
   name: "",
   internshipName: "",
@@ -50,9 +52,19 @@ function forms() {
   });
 
   const classes = useStyles();
+  const navigate = useNavigate();
+  const routeChange = (e) => {
+    e.preventDefault()
+    navigate("/certificate", { state: values, replace: true });
+  };
 
   return (
-    <Box display="flex">
+    <Container display="flex" sx={{ mt: "4em" }}>
+      <Typography
+        sx={{ fontSize: "1.6rem", fontWeight: "500", color: "primary.main" }}
+      >
+        Enter your details:
+      </Typography>
       <form onSubmit={handleSubmit}>
         <Grid
           display="flex"
@@ -228,28 +240,17 @@ function forms() {
         </Grid>
         <Box display="flex" justifyContent="center">
           <Button
-            sx={{ m: "3em 0", p: ".7rem", letterSpacing: 1 }}
+            sx={{ m: "4em 0", p: ".7rem", letterSpacing: 1 }}
             disabled={!isValid}
             type="submit"
             variant="contained"
+            onClick={routeChange}
           >
             View your Certificate
           </Button>
         </Box>
-        {true && (
-          <Certificate
-            name={values.name}
-            organisation={values.organisationName}
-            organisedBy={values.internshipOrganiser}
-            internshipName={values.internshipName}
-            role={values.role}
-            startDate={values.startDate}
-            endDate={values.endDate}
-            image={values.image}
-          />
-        )}
       </form>
-    </Box>
+    </Container>
   );
 }
 

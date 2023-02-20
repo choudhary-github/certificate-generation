@@ -1,6 +1,10 @@
 import { makeStyles } from "@mui/styles";
 
 export default makeStyles(() => ({
+  main:{
+    marginTop:'6em'
+  }
+  ,
   container:{
     border:'2px solid black',
     display:'flex',
