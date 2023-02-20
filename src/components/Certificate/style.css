@@ -1,0 +1,8 @@
+@media print{
+  html,body{
+    font-size: 110%;
+  }
+  button{
+    visibility: hidden;
+  }
+}

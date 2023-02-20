@@ -7,8 +7,10 @@ import {
   ThemeProvider,
   Button,
 } from "@mui/material";
-import React from "react";
+import React, { useRef } from "react";
 import useStyles from "./style";
+import { useReactToPrint } from "react-to-print";
+import './style.css'
 
 const theme = createTheme({
   typography: {
@@ -18,8 +20,8 @@ const theme = createTheme({
 import { useLocation } from "react-router-dom";
 
 function Certificate() {
+  const printRef = useRef();
   const location = useLocation();
-  console.log(location.state);
   const {
     image,
     name,
@@ -30,12 +32,15 @@ function Certificate() {
     startDate,
     endDate,
   } = location.state;
-  let firstName = name.split(' ').slice(0, 1).join(' ')
+  let firstName = name.split(" ").slice(0, 1).join(" ");
   const randomNum = Math.floor(Math.random() * 9000000000) + 1000000000;
   const classes = useStyles();
+  const handlePrint = useReactToPrint({
+    content: () => printRef.current,
+  });
 
   return (
-    <div className={classes.main}>
+    <div ref={printRef} className={classes.main}>
       <ThemeProvider theme={theme}>
         <Container className={classes.container} maxWidth="md">
           <Typography fontWeight={400} fontSize={"2.7rem"} color={"#3c3b7a"}>
@@ -220,7 +225,7 @@ function Certificate() {
               Download
             </Button>
             <Button
-            onClick={()=>{window.print()}}
+              onClick={handlePrint}
               sx={{
                 width: "10em",
                 fontWeight: "400",
@@ -238,8 +243,6 @@ function Certificate() {
             >
               Print
             </Button>
-
-            
           </Box>
         </Container>
       </ThemeProvider>

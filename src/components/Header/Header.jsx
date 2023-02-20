@@ -155,7 +155,6 @@ function ElevateAppBar(props) {
                 </MenuItem>
                 <MenuItem>
                   <NavLink
-                    onClick={() => {}}
                     style={({ isActive }) => (isActive ? activeStyle : null)}
                     className={classes.navlink}
                     to="#"

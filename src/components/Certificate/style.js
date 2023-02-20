@@ -6,7 +6,7 @@ export default makeStyles(() => ({
   }
   ,
   container:{
-    border:'2px solid black',
+    // border:'2px solid black',
     display:'flex',
   },
   box:{
@@ -28,6 +28,7 @@ export default makeStyles(() => ({
     display:'flex',
     justifyContent:'center',
     
+    
   },
   detailsBox:{
     justifyContent:'center',
@@ -36,5 +37,4 @@ export default makeStyles(() => ({
     margin:'0 auto !important',
     margin:"20px 50px 0px !important"
   }
-
 }));
