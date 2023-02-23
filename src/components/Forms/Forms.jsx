@@ -180,11 +180,13 @@ function forms() {
                   <em>Select</em>
                 </MenuItem>
                 <hr />
-                <MenuItem value={"Web Developer"}>Web Developer</MenuItem>
+                <MenuItem value={"Frontend Developer"}>Frontend Developer</MenuItem>
                 <hr />
-                <MenuItem value={2}>Two</MenuItem>
+                <MenuItem value={"Backend Developer"}>Backend Developer</MenuItem>
                 <hr />
-                <MenuItem value={3}>Three</MenuItem>
+                <MenuItem value={"Data Science"}>Data Science</MenuItem>
+                <hr />
+                <MenuItem value={"Data Science"}>Data Science</MenuItem>
               </Select>
               {touched.role && (
                 <FormHelperText>Please choose one.</FormHelperText>
