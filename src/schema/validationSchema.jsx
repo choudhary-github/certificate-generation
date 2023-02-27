@@ -14,14 +14,3 @@ export const validationSchema = Yup.object({
   startDate: Yup.date().required("Please select your joining date."),
   endDate: Yup.date().required("Please select your completing date."),
 });
-
-// name: "",
-//   internshipName: "",
-//   email: "",
-//   mobileNumber: "",
-//   organisationName: "",
-//   //
-//   role: "",
-//   internshipOrganiser: "",
-//   startDate: null,
-//   endDate: null,

@@ -1,0 +1,22 @@
+body{
+  margin: 0;
+}
+.app{
+  /* position: relative; */
+  margin: 0 auto;
+  margin-top: 50px;
+  display: flex;
+  background-image: url('../../assets/Certificate.png');
+  width: 1000px;
+  height: 650px;
+  /* justify-content: center; */
+  /* align-items: center; */
+  background-size: contain;
+  background-repeat: no-repeat;
+  /* position: relative; */
+}
+@media print{
+  button{
+    visibility: hidden;
+  }
+}

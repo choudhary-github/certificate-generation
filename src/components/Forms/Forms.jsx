@@ -55,7 +55,7 @@ function forms() {
   const navigate = useNavigate();
   const routeChange = (e) => {
     e.preventDefault()
-    navigate("/certificate", { state: values, replace: true });
+    navigate("/certificate1", { state: values, replace: true });
   };
 
   return (
@@ -227,7 +227,7 @@ function forms() {
             </Grid>
             <Grid item md={6} xs={12}>
               <DesktopDatePicker
-                disableFuture
+                // disableFuture
                 value={values.endDate}
                 className={classes.date}
                 label="End Date"
